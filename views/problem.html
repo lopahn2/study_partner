@@ -1,0 +1,88 @@
+<!-- views/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ data.title }}</title>
+  <style>
+    .correct-answer {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ data.title }}</h1>
+
+  <div id="quiz-container">
+    {% for question in data.data %}
+    <div
+      class="question"
+      id="question{{ loop.index }}"
+      data-correct-answer="{{ question.answer }}"
+      {% if loop.index !== 1 %} style="display: none;" {% endif %} 
+    >
+      <p>{{ question.question }}</p>
+
+      <form id="form{{ loop.index }}">
+        {% for option in question.options %}
+        <label>
+          <input
+            type="radio"
+            name="option"
+            value="{{ option }}"
+          />
+          {{ option }} </label
+        ><br />
+        {% endfor %}
+      </form>
+
+      <p id="answer-feedback{{ loop.index }}"></p>
+      <button onclick='checkAnswer("{{ loop.index }}")'>다음</button>
+    </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    function checkAnswer(questionNumber) {
+  const questionElement = document.getElementById(`question${questionNumber}`);
+  const formElement = document.getElementById(`form${questionNumber}`);
+  const userAnswer = document.querySelector(`input[name^="option"]:checked`);
+  console.log(userAnswer);
+
+  if (userAnswer) {
+    const storedValue = userAnswer.value; // Store the selected value
+
+    const correctAnswer = questionElement.getAttribute("data-correct-answer");
+    const feedbackElement = document.getElementById(`answer-feedback${questionNumber}`);
+
+    if (storedValue === correctAnswer) {
+      alert("정답입니다!");
+    } else {
+      alert(`틀렸습니다. 정답은: ${correctAnswer}`);
+    }
+
+    // Move to the next question or end the quiz
+    questionElement.style.display = "none";
+
+    // Uncheck the radio button
+    userAnswer.checked = false;
+
+    // Check if there is a next question
+    const nextQuestionElement = document.getElementById(`question${parseInt(questionNumber) + 1}`);
+    if (nextQuestionElement) {
+      nextQuestionElement.style.display = "block";
+    } else {
+      alert("퀴즈가 종료되었습니다.");
+      window.location.href = "/main";
+    }
+  } else {
+    alert("답을 선택하세요!");
+    formElement.reset();
+  }
+}
+
+  </script>
+</body>
+</html>

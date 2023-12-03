@@ -35,6 +35,9 @@
         formData.append("pdfFile", pdfFileInput.files[0]);
 
         try {
+          alert(
+            "파일을 업로드하는 중입니다. 최대 1분이 소요될 수 있습니다. 페이지를 새로고침하지 마세요."
+          );
           const response = await axios.post("/pdf/upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -44,8 +47,9 @@
           });
 
           if (response.status === 200) {
-            console.log(response.data.text);
+            console.log(response);
             alert("파일이 성공적으로 업로드되었습니다.");
+            window.location.href = "/pdf/problem";
           } else {
             alert("파일 업로드 중 오류가 발생했습니다.");
           }

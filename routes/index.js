@@ -16,4 +16,7 @@ router.get("/preMain", verifyToken, async function (req, res, next) {
 router.get("/main", async function (req, res, next) {
   res.render("main");
 });
+router.get("/problem", async function (req, res, next) {
+  res.render("problem");
+});
 export default router;
