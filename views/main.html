@@ -1,0 +1,58 @@
+<!-- views/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Partner</title>
+  </head>
+  <body>
+    <h1>안녕하세요! Study Partner입니다.</h1>
+    <h2>학습하고자 하는 PDF를 업로드해 학습을 진행하세요!</h2>
+    <div class="col-md-4">
+      <h4>PDF 파일 업로드</h4>
+      <input
+        type="file"
+        id="pdf-file"
+        accept="application/pdf"
+        class="form-control mb-3"
+      />
+    </div>
+    <button onclick="submitData()">학습시키기</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const token = localStorage.getItem("token");
+      const submitData = async () => {
+        const pdfFileInput = document.getElementById("pdf-file");
+        // 입력값 확인
+        if (!pdfFileInput.files[0]) {
+          alert("PDF 파일을 입력해주세요.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("pdfFile", pdfFileInput.files[0]);
+
+        try {
+          const response = await axios.post("/pdf/upload", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              authorization: `${token}`,
+              // Add other headers if needed
+            },
+          });
+
+          if (response.status === 200) {
+            console.log(response.data.text);
+            alert("파일이 성공적으로 업로드되었습니다.");
+          } else {
+            alert("파일 업로드 중 오류가 발생했습니다.");
+          }
+        } catch (error) {
+          console.error("파일 업로드 중 오류:", error);
+        }
+      };
+    </script>
+  </body>
+</html>

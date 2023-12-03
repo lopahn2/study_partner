@@ -7,6 +7,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "@opendocsg/pdf2md": "^0.1.27",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bluebird": "^3.7.2",

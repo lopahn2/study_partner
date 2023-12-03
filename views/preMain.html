@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Partner</title>
+  </head>
+  <body>
+    <h1>안녕하세요! Study Partner입니다.</h1>
+    <h2>아래 버튼을 눌러서 문제를 만들러 이동하세요!</h2>
+    <div id="myData" data-token="{{ token }}"></div>
+    <button onclick="start()">시작하기</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const token = document
+        .getElementById("myData")
+        .getAttribute("data-token");
+      localStorage.setItem("token", token);
+
+      const start = async () => {
+        console.log(token);
+        axios
+          .get("/preMain", {
+            headers: {
+              authorization: `${token}`,
+              // Add other headers if needed
+              "Content-Type": "application/json",
+            },
+          })
+          .then(() => {
+            window.location.href = "/main";
+          });
+      };
+    </script>
+  </body>
+</html>
