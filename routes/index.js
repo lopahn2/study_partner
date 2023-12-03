@@ -6,10 +6,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
-  res.render("index", { message: "Hello, Nunjucks!" });
+  res.render("main");
 });
 
-router.get("/preMain", verifyToken, async function (req, res, next) {
+router.get("/preMain", async function (req, res, next) {
   console.log("hello");
   res.redirect("/main");
 });

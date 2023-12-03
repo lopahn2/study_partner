@@ -1,6 +1,6 @@
 create database study_partner default character set utf8 collate utf8_general_ci;
 
-CREATE USER 'hwany'@'localhost' IDENTIFIED BY '1q2w3e4r!!';
+CREATE USER 'hwany'@'localhost' IDENTIFIED BY '1q2w3e4r!';
 GRANT ALL PRIVILEGES ON *.* TO 'hwany'@'localhost';
 FLUSH PRIVILEGES;
 
