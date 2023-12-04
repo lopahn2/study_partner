@@ -20,7 +20,7 @@ const configuration = new Configuration({
   apiKey: process.env.GPT_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-const questions = [];
+let questions = [];
 router.post("/upload", upload.single("pdfFile"), (req, res) => {
   // 업로드된 파일은 req.file.buffer에 저장됨
   const pdfBuffer = req.file.buffer;
@@ -66,7 +66,8 @@ router.post("/upload", upload.single("pdfFile"), (req, res) => {
       //     answer: "The 'what' of the requirements to the 'how' of design",
       //   },
       // ]);
-      return res.status(200).json({ data: "success" });
+      res.render("problem.html", { data });
+      // return res.status(200).json({ data: "success" });
     })
     .catch((err) => {
       console.error(err);
