@@ -21,7 +21,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 const questions = [];
-router.post("/upload", verifyToken, upload.single("pdfFile"), (req, res) => {
+router.post("/upload", upload.single("pdfFile"), (req, res) => {
   // 업로드된 파일은 req.file.buffer에 저장됨
   const pdfBuffer = req.file.buffer;
   pdf2md(pdfBuffer)
