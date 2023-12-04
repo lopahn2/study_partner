@@ -30,7 +30,7 @@ router.post("/upload", upload.single("pdfFile"), (req, res) => {
         {
           role: "system",
           content:
-            "Create 10 multiple-choice questions based on the text provided by the user. The text is in markdown format, and the concepts follow the categories of markdown. For example, in the case of # School ## Student ### younghwan ## Teacher ### Jason, it means that there are Student and Teacher under School, younghwan under Student, and Jason under Teacher. Multiple-choice questions should have only one correct answer, and there should be 5 options for each question. Also, since the questions need to be used on the server, you must provide them in JSON format.",
+            "Create 10 multiple-choice questions based on the text provided by the user. The text is in markdown format, and the concepts follow the categories of markdown. For example, in the case of # School ## Student ### younghwan ## Teacher ### Jason, it means that there are Student and Teacher under School, younghwan under Student, and Jason under Teacher. Multiple-choice questions should have only one correct answer, and there should be 5 options for each question. Also, since the questions need to be used on the server, you must provide them in JSON format. Finally answer's json key must be 'answer' not others.",
         },
         { role: "user", content: `${text}` },
       ];
