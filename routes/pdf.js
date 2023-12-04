@@ -83,5 +83,6 @@ router.get("/problem", async (req, res) => {
   };
 
   res.render("problem.html", { data });
+  questions = [];
 });
 export default router;
