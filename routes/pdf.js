@@ -66,8 +66,7 @@ router.post("/upload", upload.single("pdfFile"), (req, res) => {
       //     answer: "The 'what' of the requirements to the 'how' of design",
       //   },
       // ]);
-      res.render("problem.html", { data });
-      // return res.status(200).json({ data: "success" });
+      return res.status(200).json({ data: "success" });
     })
     .catch((err) => {
       console.error(err);
