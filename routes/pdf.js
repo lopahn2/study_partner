@@ -35,37 +35,37 @@ router.post("/upload", upload.single("pdfFile"), (req, res) => {
         { role: "user", content: `${text}` },
       ];
       console.log("문제가 생성중입니다.");
-      // const completion = await openai.chat.completions.create({
-      //   messages,
-      //   model: "gpt-4",
-      // });
-      // questions.push(JSON.parse(completion.choices[0].message.content));
-      questions.push([
-        {
-          question:
-            "What is the main purpose of design in software development process?",
-          options: [
-            "To apply various techniques and principles to define a system in enough detail for its physical realization",
-            "To code the software",
-            "To troubleshoot the software",
-            "To sell the software",
-            "To use the software",
-          ],
-          answer:
-            "To apply various techniques and principles to define a system in enough detail for its physical realization",
-        },
-        {
-          question: "What does design process convert in software development?",
-          options: [
-            "The design of the software to code",
-            "The 'what' of the requirements to the 'how' of design",
-            "The bugs in the software to solutions",
-            "The software to a physical product",
-            "The needs of the user to software features",
-          ],
-          answer: "The 'what' of the requirements to the 'how' of design",
-        },
-      ]);
+      const completion = await openai.chat.completions.create({
+        messages,
+        model: "gpt-4",
+      });
+      questions.push(JSON.parse(completion.choices[0].message.content));
+      // questions.push([
+      //   {
+      //     question:
+      //       "What is the main purpose of design in software development process?",
+      //     options: [
+      //       "To apply various techniques and principles to define a system in enough detail for its physical realization",
+      //       "To code the software",
+      //       "To troubleshoot the software",
+      //       "To sell the software",
+      //       "To use the software",
+      //     ],
+      //     answer:
+      //       "To apply various techniques and principles to define a system in enough detail for its physical realization",
+      //   },
+      //   {
+      //     question: "What does design process convert in software development?",
+      //     options: [
+      //       "The design of the software to code",
+      //       "The 'what' of the requirements to the 'how' of design",
+      //       "The bugs in the software to solutions",
+      //       "The software to a physical product",
+      //       "The needs of the user to software features",
+      //     ],
+      //     answer: "The 'what' of the requirements to the 'how' of design",
+      //   },
+      // ]);
       return res.status(200).json({ data: "success" });
     })
     .catch((err) => {
